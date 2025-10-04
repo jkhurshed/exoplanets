@@ -1,26 +1,70 @@
-Clone repository or download it manualy
-Run the following command to create python virtual environment:
-    python3 -m venv myenv
-Run to activate:
-    source myenv/bin/activate
-Then install the neccessary dependencies:
-    pip install -r requirements.txt
-To train and get saved model run:
-    python exominer.py
-This will give you trained and saved to .pkl and .keras. The .pkl file will contain everything needed to make new predictions, while the .keras file is the standard TensorFlow format that's most reliable for long-term storage.
-When You Might Want the .keras File:
-TensorFlow ecosystem - If you want to use TensorFlow tools like:
+---
 
-TensorFlow Serving
+# 🌌 ExoMiner-like Exoplanet Classifier
 
-TensorFlow Lite (for mobile)
+This repository contains an implementation of a deep learning classifier inspired by **NASA’s ExoMiner**, designed to identify exoplanet candidates from Kepler/TESS light curves and auxiliary stellar features.
 
-TensorFlow.js (for web)
+The model uses **CNNs** for light-curve views (global + local) combined with **MLP layers** for stellar parameters and vetting metrics.
 
-Model sharing - If you want to share just the model architecture with others
+---
 
-Transfer learning - If you want to use this as a base for other models
+## 🚀 Features
 
-Model visualization - Some tools work better with native Keras format
+* Preprocesses light curves into **global and local folded views**
+* Incorporates **stellar parameters & vetting features**
+* Outputs **probability of planet vs. false positive**
+* Saves model in both **`.pkl` (pipeline)** and **`.keras` (TensorFlow format)**
+* `.keras` format is recommended for:
 
-if you do not need .keras just ignore it.
+  * TensorFlow Serving
+  * TensorFlow Lite (mobile)
+  * TensorFlow.js (web)
+  * Transfer learning
+  * Visualization tools
+
+---
+
+## 🛠️ Installation
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/your-username/exominer-classifier.git
+cd exominer-classifier
+```
+
+### 2. Create and activate virtual environment
+
+```bash
+python3 -m venv myenv
+source myenv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🧑‍💻 Training the Model
+
+Run the training script:
+
+```bash
+python exominer.py
+```
+
+This will:
+
+* Train the model on provided/preprocessed dataset
+* Save results to:
+
+  * `model.pkl` → includes full pipeline (preprocessing + model) for predictions
+  * `model.keras` → standard TensorFlow format, most reliable for long-term storage
+
+If you only need predictions with the trained pipeline, the `.pkl` file is enough.
+If you want to use TensorFlow tools or extend the model, keep the `.keras` file.
+
+---
